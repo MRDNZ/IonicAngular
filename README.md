@@ -1,8 +1,7 @@
 ## Before we start make sure you have to following SDK’s
-
-Install Android SDK, (Android studio)
-Install IOS SDK, (X code)
-Install java SDK
+- Install Android SDK, (Android studio)
+- Install IOS SDK, (X code)
+- Install java SDK
 
 Having a gradle issue? Set the right permissions by running:
 -	chmod +x /Applications/Android\ Studio.app/Contents/gradle/gradle-4.1/bin/gradle
