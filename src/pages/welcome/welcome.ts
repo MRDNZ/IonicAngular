@@ -10,7 +10,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-welcome',
-  templateUrl: 'welcome.html'
+  templateUrl: 'welcome.html',
 })
 export class WelcomePage {
 

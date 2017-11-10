@@ -25,7 +25,7 @@ import { Api } from '../api/api';
  */
 @Injectable()
 export class User {
-  _user: any;
+  user: any;
 
   constructor(public api: Api) { }
 
@@ -34,15 +34,14 @@ export class User {
    * the user entered on the form.
    */
   login(accountInfo: any) {
-    let seq = this.api.post('login', accountInfo).share();
+    const seq = this.api.post('login', accountInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      } else {
+      if (res.status === 'success') {
+        this.loggedIn(res);
       }
-    }, err => {
+    },            (err) => {
       console.error('ERROR', err);
     });
 
@@ -54,14 +53,14 @@ export class User {
    * the user entered on the form.
    */
   signup(accountInfo: any) {
-    let seq = this.api.post('signup', accountInfo).share();
+    const seq = this.api.post('signup', accountInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
+      if (res.status === 'success') {
+        this.loggedIn(res);
       }
-    }, err => {
+    },            (err) => {
       console.error('ERROR', err);
     });
 
@@ -72,13 +71,13 @@ export class User {
    * Log the user out, which forgets the session
    */
   logout() {
-    this._user = null;
+    this.user = null;
   }
 
   /**
    * Process a login/signup response to store user data
    */
-  _loggedIn(resp) {
-    this._user = resp.user;
+  loggedIn(resp) {
+    this.user = resp.user;
   }
 }

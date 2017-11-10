@@ -4,7 +4,7 @@ import { IonicPage, Nav, NavController } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-menu',
-  templateUrl: 'menu.html'
+  templateUrl: 'menu.html',
 })
 export class MenuPage {
   // A reference to the ion-nav in our component
@@ -18,7 +18,7 @@ export class MenuPage {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Sign in', component: 'LoginPage' },
-      { title: 'Signup', component: 'SignupPage' }
+      { title: 'Signup', component: 'SignupPage' },
     ];
   }
 

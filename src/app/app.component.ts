@@ -24,7 +24,7 @@ import { Settings } from '../providers/providers';
     </ion-content>
 
   </ion-menu>
-  <ion-nav #content [root]="rootPage"></ion-nav>`
+  <ion-nav #content [root]="rootPage"></ion-nav>`,
 })
 export class MyApp {
   rootPage = FirstRunPage;
@@ -42,10 +42,16 @@ export class MyApp {
     { title: 'Master Detail', component: 'ListMasterPage' },
     { title: 'Menu', component: 'MenuPage' },
     { title: 'Settings', component: 'SettingsPage' },
-    { title: 'Search', component: 'SearchPage' }
-  ]
+    { title: 'Search', component: 'SearchPage' },
+  ];
 
-  constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+  constructor(platform: Platform,
+              settings: Settings,
+              private translate: TranslateService,
+              private config: Config,
+              private statusBar: StatusBar,
+              private splashScreen: SplashScreen) {
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -65,7 +71,7 @@ export class MyApp {
       this.translate.use('en'); // Set your language here
     }
 
-    this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
+    this.translate.get(['BACK_BUTTON_TEXT']).subscribe((values) => {
       this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
     });
   }

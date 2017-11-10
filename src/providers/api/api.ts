@@ -11,18 +11,12 @@ export class Api {
   constructor(public http: HttpClient) {
   }
 
-  get(endpoint: string, params?: any, reqOpts?: any) {
+  get(endpoint: string, params: any = {}, reqOpts?: any) {
     if (!reqOpts) {
-      reqOpts = {
-        params: new HttpParams()
-      };
-    }
-
-    // Support easy query params for GET requests
-    if (params) {
       reqOpts.params = new HttpParams();
-      for (let k in params) {
-        reqOpts.params.set(k, params[k]);
+
+      for (const key in params) {
+        reqOpts.params.set(key, params[key]);
       }
     }
 

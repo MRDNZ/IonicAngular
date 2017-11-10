@@ -10,10 +10,10 @@ import { ContentPage } from './content';
   ],
   imports: [
     IonicPageModule.forChild(ContentPage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
   ],
   exports: [
-    ContentPage
-  ]
+    ContentPage,
+  ],
 })
 export class ContentPageModule { }

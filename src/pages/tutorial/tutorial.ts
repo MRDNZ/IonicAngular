@@ -12,21 +12,25 @@ export interface Slide {
 @IonicPage()
 @Component({
   selector: 'page-tutorial',
-  templateUrl: 'tutorial.html'
+  templateUrl: 'tutorial.html',
 })
 export class TutorialPage {
   slides: Slide[];
   showSkip = true;
   dir: string = 'ltr';
 
-  constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService, public platform: Platform) {
+  constructor(translate: TranslateService,
+              public navCtrl: NavController,
+              public menu: MenuController,
+              public platform: Platform) {
+
     this.dir = platform.dir();
-    translate.get(["TUTORIAL_SLIDE1_TITLE",
-      "TUTORIAL_SLIDE1_DESCRIPTION",
-      "TUTORIAL_SLIDE2_TITLE",
-      "TUTORIAL_SLIDE2_DESCRIPTION",
-      "TUTORIAL_SLIDE3_TITLE",
-      "TUTORIAL_SLIDE3_DESCRIPTION",
+    translate.get(['TUTORIAL_SLIDE1_TITLE',
+      'TUTORIAL_SLIDE1_DESCRIPTION',
+      'TUTORIAL_SLIDE2_TITLE',
+      'TUTORIAL_SLIDE2_DESCRIPTION',
+      'TUTORIAL_SLIDE3_TITLE',
+      'TUTORIAL_SLIDE3_DESCRIPTION',
     ]).subscribe(
       (values) => {
         console.log('Loaded values', values);
@@ -45,7 +49,7 @@ export class TutorialPage {
             title: values.TUTORIAL_SLIDE3_TITLE,
             description: values.TUTORIAL_SLIDE3_DESCRIPTION,
             image: 'assets/img/ica-slidebox-img-3.png',
-          }
+          },
         ];
       });
   }
@@ -53,7 +57,7 @@ export class TutorialPage {
   startApp() {
     this.navCtrl.setRoot('WelcomePage', {}, {
       animate: true,
-      direction: 'forward'
+      direction: 'forward',
     });
   }
 

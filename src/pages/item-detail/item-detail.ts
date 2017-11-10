@@ -6,7 +6,7 @@ import { Items } from '../../providers/providers';
 @IonicPage()
 @Component({
   selector: 'page-item-detail',
-  templateUrl: 'item-detail.html'
+  templateUrl: 'item-detail.html',
 })
 export class ItemDetailPage {
   item: any;

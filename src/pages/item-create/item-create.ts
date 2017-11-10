@@ -6,7 +6,7 @@ import { IonicPage, NavController, ViewController } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-item-create',
-  templateUrl: 'item-create.html'
+  templateUrl: 'item-create.html',
 })
 export class ItemCreatePage {
   @ViewChild('fileInput') fileInput;
@@ -17,11 +17,15 @@ export class ItemCreatePage {
 
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
+  constructor(formBuilder: FormBuilder,
+              public navCtrl: NavController,
+              public viewCtrl: ViewController,
+              public camera: Camera) {
+
     this.form = formBuilder.group({
       profilePic: [''],
       name: ['', Validators.required],
-      about: ['']
+      about: [''],
     });
 
     // Watch the form for changes, and
@@ -39,30 +43,30 @@ export class ItemCreatePage {
       this.camera.getPicture({
         destinationType: this.camera.DestinationType.DATA_URL,
         targetWidth: 96,
-        targetHeight: 96
+        targetHeight: 96,
       }).then((data) => {
-        this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
-      }, (err) => {
+        this.form.patchValue({ profilePic: 'data:image/jpg;base64,' + data });
+      },      (err) => {
         alert('Unable to take photo');
-      })
+      });
     } else {
       this.fileInput.nativeElement.click();
     }
   }
 
   processWebImage(event) {
-    let reader = new FileReader();
+    const reader = new FileReader();
     reader.onload = (readerEvent) => {
 
-      let imageData = (readerEvent.target as any).result;
-      this.form.patchValue({ 'profilePic': imageData });
+      const imageData = (readerEvent.target as any).result;
+      this.form.patchValue({ profilePic: imageData });
     };
 
     reader.readAsDataURL(event.target.files[0]);
   }
 
   getProfileImageStyle() {
-    return 'url(' + this.form.controls['profilePic'].value + ')'
+    return 'url(' + this.form.controls['profilePic'].value + ')';
   }
 
   /**

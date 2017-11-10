@@ -9,12 +9,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
-import { Items } from '../mocks/providers/items';
-import { Settings } from '../providers/providers';
-import { User } from '../providers/providers';
-import { Api } from '../providers/providers';
 import { MyApp } from './app.component';
-
+import { Items, Settings, User, Api } from '../providers/providers';
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -32,13 +28,13 @@ export function provideSettings(storage: Storage) {
     option1: true,
     option2: 'Ionitron J. Framework',
     option3: '3',
-    option4: 'Hello'
+    option4: 'Hello',
   });
 }
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
   ],
   imports: [
     BrowserModule,
@@ -47,15 +43,15 @@ export function provideSettings(storage: Storage) {
       loader: {
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
   ],
   providers: [
     Api,
@@ -66,7 +62,7 @@ export function provideSettings(storage: Storage) {
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
-  ]
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+  ],
 })
 export class AppModule { }

@@ -7,12 +7,15 @@ import { Items } from '../../providers/providers';
 @IonicPage()
 @Component({
   selector: 'page-list-master',
-  templateUrl: 'list-master.html'
+  templateUrl: 'list-master.html',
 })
 export class ListMasterPage {
   currentItems: Item[];
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController,
+              public items: Items,
+              public modalCtrl: ModalController) {
+
     this.currentItems = this.items.query();
   }
 
@@ -27,12 +30,12 @@ export class ListMasterPage {
    * modal and then adds the new item to our data source if the user created one.
    */
   addItem() {
-    let addModal = this.modalCtrl.create('ItemCreatePage');
-    addModal.onDidDismiss(item => {
+    const addModal = this.modalCtrl.create('ItemCreatePage');
+    addModal.onDidDismiss((item) => {
       if (item) {
         this.items.add(item);
       }
-    })
+    });
     addModal.present();
   }
 
@@ -48,7 +51,7 @@ export class ListMasterPage {
    */
   openItem(item: Item) {
     this.navCtrl.push('ItemDetailPage', {
-      item: item
+      item,
     });
   }
 }

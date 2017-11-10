@@ -13,7 +13,7 @@ import { Settings } from '../../providers/providers';
 @IonicPage()
 @Component({
   selector: 'page-settings',
-  templateUrl: 'settings.html'
+  templateUrl: 'settings.html',
 })
 export class SettingsPage {
   // Our local settings object
@@ -25,7 +25,7 @@ export class SettingsPage {
 
   profileSettings = {
     page: 'profile',
-    pageTitleKey: 'SETTINGS_PAGE_PROFILE'
+    pageTitleKey: 'SETTINGS_PAGE_PROFILE',
   };
 
   page: string = 'main';
@@ -35,17 +35,17 @@ export class SettingsPage {
   subSettings: any = SettingsPage;
 
   constructor(public navCtrl: NavController,
-    public settings: Settings,
-    public formBuilder: FormBuilder,
-    public navParams: NavParams,
-    public translate: TranslateService) {
+              public settings: Settings,
+              public formBuilder: FormBuilder,
+              public navParams: NavParams,
+              public translate: TranslateService) {
   }
 
-  _buildForm() {
+  buildForm() {
     let group: any = {
       option1: [this.options.option1],
       option2: [this.options.option2],
-      option3: [this.options.option3]
+      option3: [this.options.option3],
     };
 
     switch (this.page) {
@@ -53,7 +53,7 @@ export class SettingsPage {
         break;
       case 'profile':
         group = {
-          option4: [this.options.option4]
+          option4: [this.options.option4],
         };
         break;
     }
@@ -79,13 +79,13 @@ export class SettingsPage {
 
     this.translate.get(this.pageTitleKey).subscribe((res) => {
       this.pageTitle = res;
-    })
+    });
 
     this.settings.load().then(() => {
       this.settingsReady = true;
       this.options = this.settings.allSettings;
 
-      this._buildForm();
+      this.buildForm();
     });
   }
 

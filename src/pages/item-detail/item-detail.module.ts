@@ -10,10 +10,10 @@ import { ItemDetailPage } from './item-detail';
   ],
   imports: [
     IonicPageModule.forChild(ItemDetailPage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
   ],
   exports: [
-    ItemDetailPage
-  ]
+    ItemDetailPage,
+  ],
 })
 export class ItemDetailPageModule { }

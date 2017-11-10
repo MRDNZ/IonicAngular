@@ -10,38 +10,38 @@ export class Settings {
 
   settings: any;
 
-  _defaults: any;
-  _readyPromise: Promise<any>;
+  defaults: any;
+  readyPromise: Promise<any>;
 
   constructor(public storage: Storage, defaults: any) {
-    this._defaults = defaults;
+    this.defaults = defaults;
   }
 
   load() {
     return this.storage.get(this.SETTINGS_KEY).then((value) => {
       if (value) {
         this.settings = value;
-        return this._mergeDefaults(this._defaults);
+        return this.mergeDefaults(this.defaults);
       } else {
-        return this.setAll(this._defaults).then((val) => {
+        return this.setAll(this.defaults).then((val) => {
           this.settings = val;
-        })
+        });
       }
     });
   }
 
-  _mergeDefaults(defaults: any) {
-    for (let k in defaults) {
-      if (!(k in this.settings)) {
-        this.settings[k] = defaults[k];
+  mergeDefaults(defaults: any) {
+    for (const key in defaults) {
+      if (!(key in this.settings)) {
+        this.settings[key] = defaults[key];
       }
     }
     return this.setAll(this.settings);
   }
 
   merge(settings: any) {
-    for (let k in settings) {
-      this.settings[k] = settings[k];
+    for (const key in settings) {
+      this.settings[key] = settings[key];
     }
     return this.save();
   }
@@ -57,9 +57,7 @@ export class Settings {
 
   getValue(key: string) {
     return this.storage.get(this.SETTINGS_KEY)
-      .then(settings => {
-        return settings[key];
-      });
+      .then(settings =>  settings[key]);
   }
 
   save() {

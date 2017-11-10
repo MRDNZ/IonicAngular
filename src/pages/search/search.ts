@@ -7,7 +7,7 @@ import { Items } from '../../providers/providers';
 @IonicPage()
 @Component({
   selector: 'page-search',
-  templateUrl: 'search.html'
+  templateUrl: 'search.html',
 })
 export class SearchPage {
 
@@ -19,13 +19,13 @@ export class SearchPage {
    * Perform a service for the proper items.
    */
   getItems(ev) {
-    let val = ev.target.value;
+    const val = ev.target.value;
     if (!val || !val.trim()) {
       this.currentItems = [];
       return;
     }
     this.currentItems = this.items.query({
-      name: val
+      name: val,
     });
   }
 
@@ -34,7 +34,7 @@ export class SearchPage {
    */
   openItem(item: Item) {
     this.navCtrl.push('ItemDetailPage', {
-      item: item
+      item,
     });
   }
 

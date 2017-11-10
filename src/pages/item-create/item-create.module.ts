@@ -10,10 +10,10 @@ import { ItemCreatePage } from './item-create';
   ],
   imports: [
     IonicPageModule.forChild(ItemCreatePage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
   ],
   exports: [
-    ItemCreatePage
-  ]
+    ItemCreatePage,
+  ],
 })
 export class ItemCreatePageModule { }

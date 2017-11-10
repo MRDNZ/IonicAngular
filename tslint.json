@@ -1,5 +1,10 @@
 {
+  "extends": "tslint-config-airbnb",
   "rules": {
+    "strict-boolean-expressions": false,
+    "variable-name": false,
+    "prefer-array-literal": false,
+    "array-type": false,
     "no-duplicate-variable": true,
     "no-unused-variable": [
       true

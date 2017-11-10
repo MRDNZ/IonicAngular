@@ -10,10 +10,10 @@ import { SearchPage } from './search';
   ],
   imports: [
     IonicPageModule.forChild(SearchPage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
   ],
   exports: [
-    SearchPage
-  ]
+    SearchPage,
+  ],
 })
 export class SearchPageModule { }

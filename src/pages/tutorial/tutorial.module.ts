@@ -9,10 +9,10 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     IonicPageModule.forChild(TutorialPage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
   ],
   exports: [
-    TutorialPage
-  ]
+    TutorialPage,
+  ],
 })
 export class TutorialPageModule { }

@@ -4,7 +4,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-content',
-  templateUrl: 'content.html'
+  templateUrl: 'content.html',
 })
 export class ContentPage {
 
