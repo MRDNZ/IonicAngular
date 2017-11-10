@@ -1,4 +1,5 @@
-Before we start make sure you have to following SDK’s
+## Before we start make sure you have to following SDK’s
+
 Install Android SDK, (Android studio)
 Install IOS SDK, (X code)
 Install java SDK
@@ -6,6 +7,7 @@ Install java SDK
 Having a gradle issue? Set the right permissions by running:
 -	chmod +x /Applications/Android\ Studio.app/Contents/gradle/gradle-4.1/bin/gradle
 
+```sh
 # Create a JAVA_HOME variable, determined dynamically
 export JAVA_HOME=$(/usr/libexec/java_home)
 # Add that to the global PATH variable
@@ -16,31 +18,45 @@ export ANDROID_SDK_ROOT=~/Library/Android/sdk/
 # Add the Android SDK to the ANDROID_HOME variable
 export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
 export PATH=$ANDROID_SDK_ROOT/tools:$PATH
+```
 
 
-
-Add the necessary platforms
+### Add the necessary platforms
 Needed platforms are: android, ios, browser
 
 Add platforms with the following command:
--	Cordova platform add {platform}
+```sh
+$ cordova platform add {platform}
+```
 
 
 Run the application
 To run the application in the browser use:
--	ionic serve
-- ionic cordova run browser
+```sh
+$ ionic serve
+// or
+$ ionic cordova run browser
+```
 
 For android you have 2 ways to debug in the emulator or you can connect your phone with usb and enable usb debugging/developer mode:
--	ionic cordova run android –device (--livereload)
--	ionic cordova run android –emulator --target=Nexus_5_API_26
+```sh
+$ ionic cordova run android –device (--livereload)
+// or
+$ ionic cordova run android –emulator (--target=Nexus_5_API_26)
+```
 
 To run or build android for production run:
--	ionic cordova run android --prod –release
--	ionic cordova build android --prod –release
+```sh
+$ ionic cordova run android --prod –release
+// or
+$ ionic cordova build android --prod –release
+```
 
 For ios :
--	ionic cordova run ios –emulator
--	ionic cordova build ios --prod –release
+```sh
+$ ionic cordova run ios –emulator
+// or
+$ ionic cordova build ios --prod –release
+```
 
 
