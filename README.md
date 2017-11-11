@@ -39,23 +39,23 @@ $ ionic cordova run browser
 
 For android you have 2 ways to debug in the emulator or you can connect your phone with usb and enable usb debugging/developer mode:
 ```sh
-$ ionic cordova run android –device (--livereload)
+$ ionic cordova run android –-device (--livereload)
 // or
-$ ionic cordova run android –emulator (--target=Nexus_5_API_26)
+$ ionic cordova run android –-emulator (--target=Nexus_5_API_26)
 ```
 
 To run or build android for production run:
 ```sh
-$ ionic cordova run android --prod –release
+$ ionic cordova run android --prod --release
 // or
-$ ionic cordova build android --prod –release
+$ ionic cordova build android --prod -–release
 ```
 
 For ios :
 ```sh
-$ ionic cordova run ios –emulator
+$ ionic cordova run ios –-emulator
 // or
-$ ionic cordova build ios --prod –release
+$ ionic cordova build ios --prod –-release
 ```
 
-
+note: builds are not working yet

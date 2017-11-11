@@ -6,6 +6,7 @@ import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FirstRunPage } from '../pages/pages';
 import { Settings } from '../providers/providers';
+import { factory } from '../factories/factory';
 
 @Component({
   template: `<ion-menu [content]="content">
@@ -59,6 +60,9 @@ export class MyApp {
       this.splashScreen.hide();
     });
     this.initTranslate();
+
+    const createEvent = factory('Event');
+    const weddingEvent = createEvent('Wedding');
   }
 
   initTranslate() {
