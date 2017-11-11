@@ -1,53 +1,37 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import { NgRedux, select } from '@angular-redux/store';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { Config, Nav, Platform } from 'ionic-angular';
+import { Config, Platform } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
 
-import { FirstRunPage } from '../pages/pages';
-import { Settings } from '../providers/providers';
-import { factory } from '../factories/factory';
+import { Settings, Events } from '../providers/providers';
+
+import { AppState } from '../reducers/reducers';
+import { incrementEnthusiasm, decrementEnthusiasm } from './../actions/actions';
 
 @Component({
-  template: `<ion-menu [content]="content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Pages</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content>
-      <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
-        </button>
-      </ion-list>
-    </ion-content>
-
-  </ion-menu>
-  <ion-nav #content [root]="rootPage"></ion-nav>`,
+  template: `
+    <p>{{ enthusiasm | json }}</p>
+    <button ion-button icon-only (click)="onIncrement()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+    <button ion-button icon-only (click)="onDecrement()">
+      <ion-icon name="remove"></ion-icon>
+    </button>
+    `,
 })
 export class MyApp {
-  rootPage = FirstRunPage;
 
-  @ViewChild(Nav) nav: Nav;
+  @select(store => store.test) test: Observable<any>;
 
-  pages: any[] = [
-    { title: 'Tutorial', component: 'TutorialPage' },
-    { title: 'Welcome', component: 'WelcomePage' },
-    { title: 'Tabs', component: 'TabsPage' },
-    { title: 'Cards', component: 'CardsPage' },
-    { title: 'Content', component: 'ContentPage' },
-    { title: 'Login', component: 'LoginPage' },
-    { title: 'Signup', component: 'SignupPage' },
-    { title: 'Master Detail', component: 'ListMasterPage' },
-    { title: 'Menu', component: 'MenuPage' },
-    { title: 'Settings', component: 'SettingsPage' },
-    { title: 'Search', component: 'SearchPage' },
-  ];
+  enthusiasm: {};
 
   constructor(platform: Platform,
               settings: Settings,
+              public events: Events,
+              private store:NgRedux<AppState>,
               private translate: TranslateService,
               private config: Config,
               private statusBar: StatusBar,
@@ -59,10 +43,34 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-    this.initTranslate();
 
-    const createEvent = factory('Event');
-    const weddingEvent = createEvent('Wedding');
+    this.getResources();
+    this.initTranslate();
+  }
+
+  onIncrement() {
+    this.store.dispatch(incrementEnthusiasm());
+  }
+
+  onDecrement() {
+    this.store.dispatch(decrementEnthusiasm());
+  }
+
+  getResources() {
+    this.events.query().subscribe((response) => {
+      console.warn('response', response);
+
+    },                            (error) => {
+      console.warn('error', error);
+    });
+
+    this.test.subscribe((response) => {
+      console.warn('response', response);
+      this.enthusiasm = response;
+
+    },                  (error) => {
+      console.warn('error', error);
+    });
   }
 
   initTranslate() {
@@ -78,11 +86,5 @@ export class MyApp {
     this.translate.get(['BACK_BUTTON_TEXT']).subscribe((values) => {
       this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
     });
-  }
-
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
   }
 }

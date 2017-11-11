@@ -12,6 +12,8 @@ export interface IEvent {
   remove_date:Date|string;
 }
 
+export const createEvent = (obj:IEvent) => ({ ...obj });
+
 export class Event implements IEvent {
   id;
   date;

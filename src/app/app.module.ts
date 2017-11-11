@@ -1,6 +1,7 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 import { Camera } from '@ionic-native/camera';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -8,9 +9,12 @@ import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import reduxLogger from 'redux-logger';
 
 import { MyApp } from './app.component';
-import { Items, Settings, User, Api } from '../providers/providers';
+import { Events, Items, Settings, User, Api } from '../providers/providers';
+import { rootReducer } from './../reducers/reducers';
+
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -38,6 +42,7 @@ export function provideSettings(storage: Storage) {
   ],
   imports: [
     BrowserModule,
+    NgReduxModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -56,6 +61,7 @@ export function provideSettings(storage: Storage) {
   providers: [
     Api,
     Items,
+    Events,
     User,
     Camera,
     SplashScreen,
@@ -65,4 +71,12 @@ export function provideSettings(storage: Storage) {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
   ],
 })
-export class AppModule { }
+
+export class AppModule {
+  constructor(ngRedux: NgRedux<any>,
+              devTools: DevToolsExtension) {
+
+    const enhancers = devTools.isEnabled() ? [devTools.enhancer()] : [];
+    ngRedux.configureStore(rootReducer, {}, [reduxLogger], enhancers);
+  }
+}

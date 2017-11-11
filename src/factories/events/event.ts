@@ -1,9 +1,9 @@
-import { Event, IEvent } from '../models/event';
+import { Event } from '../../models/event';
 
 export const EVENT_FACTORY = 'Event';
 export type EVENT_FACTORY = typeof EVENT_FACTORY;
 
-const WEDDING = 'Wedding'
+const WEDDING = 'Wedding';
 type EventType = typeof WEDDING;
 
 const eventAttributes = [
@@ -23,14 +23,14 @@ const eventAttributes = [
 const defaultEvent = eventAttributes.reduce((acc, curr, i, arr) => {
   acc[curr] = null;
   return acc;
-}, <Event>{});
+},                                          <Event>{});
 
-export const EventFactory = (type?:EventType) => {
-  switch(type){
+export const eventFactory = (type?:EventType) => {
+  switch (type){
     case WEDDING:
       const weddingEvent = Object.assign(defaultEvent, { type: WEDDING });
       return new Event(weddingEvent);
     default:
       return new Event(defaultEvent);
   }
-}
+};
